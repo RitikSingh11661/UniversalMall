@@ -1,10 +1,17 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import Brand from './Brand'
+import Grocery from './Grocery'
+import Jewellery from './Jewellery'
 
-export const HomePage = () => {
-  const store=useSelector(store=>store);
-  console.log(store)
+
+function HomePage() {
   return (
-    <div>HomePage</div>
+    <div>
+      <Brand/>
+      <Grocery/>
+      <Jewellery/>
+    </div>
   )
 }
+
+export default HomePage
