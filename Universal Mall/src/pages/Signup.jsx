@@ -1,61 +1,46 @@
 import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, Heading, Text, useToast } from "@chakra-ui/react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUsers, signup } from "../redux/Auth/actions";
-import { v4 as uuidv4 } from "uuid";
-import { account } from "../appwrite/appwriteConfig";
+import {getUsers, signup} from "../redux/Auth/actions";
 
 export const Signup=()=>{
-  const initUser={id:uuidv4(),email:"",password:"",name:"",cart: [],orders: []}
+  const initUser={email:"",password:"",name:"",cart:[],orders:[]}
   const [user, setUser] = useState(initUser);
   const toast = useToast();
-  const navigate=useNavigate();
-
   const dispatch = useDispatch();
   const users = useSelector((store) => store.AuthReducer.users);
-  const loading = useSelector((store) => store.AuthReducer.isLoading);
+  const navigate=useNavigate();
 
   const handleChange=(e)=>{
     const {name,value}=e.target;
     setUser({...user,[name]:value})
   }
-  
 
+  // normal with api
   const handleSubmit = (e) => {
     e.preventDefault();
-    const promise= account.create(
-      user.id,user.email,user.password,user.name,user.orders
-    )
-    promise.then((res)=>{
-      console.log('res',res);
-      navigate('/login')                  //success
-    }, 
-    (error)=>(console.log('error',error)) //failure
-    )
+    let bool = users.some((el) => {
+      return el.email === user.email;
+    });
 
-    setUser(initUser)
+    if (bool) {
+      toast({
+        title: "User already exist.",
+        description: `Try different ${user.email}`,
+        status: "error",
+        duration: 3000,
+        position: "top",
+        isClosable: true,
+      });
+    } else {
+      dispatch(signup(user, newToastSucess, newToastFail)).then(() => {
+        dispatch(getUsers);
+        console.log('render');
+        navigate('/login')
+      });
+    }
   };
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   let bool = users.some(el=>el.email === user.email);
-  //   if (bool) {
-  //     toast({
-  //       title: "User already exist.",
-  //       description: `Try different ${user.email}`,
-  //       status: "error",
-  //       duration: 3000,
-  //       position: "top",
-  //       isClosable: true,
-  //     });
-  //   } else {
-  //     dispatch(signup(user, newToastSucess, newToastFail)).then(() => {
-  //       dispatch(getUsers);
-  //       <Navigate to={"/login"} />
-  //     });
-  //   }
-  // };
 
   useEffect(() => {
     dispatch(getUsers);
