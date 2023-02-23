@@ -23,11 +23,11 @@ export const SingleProdCard = ({ id, name, type, image1, image2, price }) => {
         />
         <Text as={"b"}>₹{price}</Text>
         <br />
-        <Text as={"b"}>Check delivery date </Text>
+        <Text as={"b"}></Text>
         <br />
         <Text color={"grey"}>{name}</Text>
         <Button variant="outline" border={"1px"} onClick={onclickhandler}>
-          Book Try at Home
+          
         </Button>
       </Box>
     </Box>

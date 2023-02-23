@@ -1,4 +1,4 @@
-import { SingleProdCard } from "./SingleProdCard";
+import { SingleProdPage } from "./SingleProdCard";
 import { useSelector } from "react-redux";
 import { Grid } from "@chakra-ui/react";
 
@@ -18,7 +18,7 @@ export const Products = ({ prod }) => {
         >
           {prod.map((el) => {
             // return <SingleProdCard key={el.id} {...el} />;
-            return <SingleProdCard key={el.id} {...el} />;
+            return <SingleProdPage key={el.id} {...el} />;
           })}
         </Grid>
       )}
