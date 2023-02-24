@@ -5,6 +5,7 @@ export const Sidebar = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const initialState = searchParams.getAll("category")
     const initialOrder = searchParams.get("order")
+    const initialPage = searchParams.getAll("page")
     const [category, setCategory] = useState(initialState || [])
     const [order, setOrder] = useState(initialOrder || "");
     // console.log(initialState);

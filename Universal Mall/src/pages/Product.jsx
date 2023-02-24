@@ -14,18 +14,20 @@ export const Product = () => {
     const products = useSelector((store) => {
         return store.AppReducer.products;
     });
+    const [page, setPage] = useState(1);
 
     let obj = {
         params: {
             brand: searchParams.getAll("category"),
-            _sort: searchParams.get("order") && "originalPrice",
-            _order: searchParams.get("order")
+            _sort: searchParams.get("order") && "discountPrice",
+            _order: searchParams.get("order"),
+            _page: page
         },
     };
 
     useEffect(() => {
         dispatch(getProduct(obj));
-    }, [location.search])
+    }, [location.search,page])
 
 
     return (
@@ -44,6 +46,43 @@ export const Product = () => {
                 </Box>
             </Flex>
 
+            <Box
+                mb="10px"
+                bg=" #f1f6fd"
+                padding="30px"
+                align="center"
+                display="flex"
+                justifyContent="center"
+            >
+                <Button
+                    disabled={page === 1}
+                    color="red"
+                    colorScheme="white"
+                    bg="white"
+                    variant="outline"
+                    onClick={() => setPage(page - 1)}
+                >
+                    Previous
+                </Button>
+                <Box p="10px 20px">
+                    {" "}
+                    <Text className="pagenumber" fontWeight="500">
+                        {page}
+                    </Text>
+                </Box>
+                <Button
+                    disabled={page >= 4}
+                    color="red"
+                    colorScheme="white"
+                    bg="white"
+                    variant="outline"
+                    onClick={() => setPage(page + 1)}
+                >
+                    Next
+                </Button>
+            </Box>
+
         </div>
+
     )
 }
