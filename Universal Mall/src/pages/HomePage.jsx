@@ -1,5 +1,6 @@
 import React from 'react'
 import Brand from './Brand'
+import Footer from './Footer'
 import Grocery from './Grocery'
 import Jewellery from './Jewellery'
 
@@ -10,6 +11,7 @@ function HomePage() {
       <Brand/>
       <Grocery/>
       <Jewellery/>
+      <Footer/>
     </div>
   )
 }
