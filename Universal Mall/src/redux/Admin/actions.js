@@ -27,63 +27,38 @@ import {
   GET_ORDERS_FAILURE,
   GET_CARTS_SUCCESS,
 } from "./actiontypes";
-import {
-  GET_PRODUCTS_REQUEST,
-  GET_PRODUCTS_SUCCESS,
-  GET_PRODUCTS_FAILURE,
-} from "../App/actiontypes";
+import { GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE } from "../App/actiontypes";
 import axios from "axios";
 
 const getProductDataRequest = () => ({ type: GET_PRODUCTS_REQUEST });
-const getProductDataSuccess = (payload) => ({
-  type: GET_PRODUCTS_SUCCESS,
-  payload,
-});
+const getProductDataSuccess = (payload) => ({ type: GET_PRODUCTS_SUCCESS, payload });
 const getProductDataFailure = () => ({ type: GET_PRODUCTS_FAILURE });
 const addProductRequest = () => ({ type: ADD_PRODUCT_REQUEST });
 const addProductSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
 const addProductFailure = () => ({ type: ADD_PRODUCT_FAILURE });
 const deleteProductRequest = () => ({ type: DELETE_PRODUCT_REQUEST });
-const deleteProductSuccess = (payload) => ({
-  type: DELETE_PRODUCT_SUCCESS,
-  payload,
-});
+const deleteProductSuccess = (payload) => ({ type: DELETE_PRODUCT_SUCCESS, payload });
 const deleteProductFailure = () => ({ type: DELETE_PRODUCT_FAILURE });
 const updateProductRequest = () => ({ type: UPDATE_PRODUCT_REQUEST });
-const updateProductSuccess = (payload) => ({
-  type: UPDATE_PRODUCT_SUCCESS,
-  payload,
-});
+const updateProductSuccess = (payload) => ({ type: UPDATE_PRODUCT_SUCCESS, payload });
 const updateProductFailure = () => ({ type: UPDATE_PRODUCT_FAILURE });
 const getUserListRequest = () => ({ type: GET_USERLIST_REQUEST });
-const getUserListSuccess = (payload) => ({
-  type: GET_USERLIST_SUCCESS,
-  payload,
-});
+const getUserListSuccess = (payload) => ({ type: GET_USERLIST_SUCCESS, payload });
 const getUserListFailure = () => ({ type: GET_USERLIST_FAILURE });
 const deleteUserRequest = () => ({ type: DELETE_USER_REQUEST });
 const deleteUserSuccess = (payload) => ({ type: DELETE_USER_SUCCESS, payload });
 const deleteUserFailure = () => ({ type: DELETE_USER_FAILURE });
 const getAdminListRequest = () => ({ type: GET_ADMINLIST_REQUEST });
-const getAdminListSuccess = (payload) => ({
-  type: GET_ADMINLIST_SUCCESS,
-  payload,
-});
+const getAdminListSuccess = (payload) => ({ type: GET_ADMINLIST_SUCCESS, payload });
 const getAdminListFailure = () => ({ type: GET_ADMINLIST_FAILURE });
 const addAdminRequest = () => ({ type: ADD_PRODUCT_REQUEST });
 const addAdminSuccess = (payload) => ({ type: ADD_PRODUCT_SUCCESS, payload });
 const addAdminFailure = () => ({ type: ADD_PRODUCT_FAILURE });
 const deleteAdminRequest = () => ({ type: DELETE_ADMIN_REQUEST });
-const deleteAdminSuccess = (payload) => ({
-  type: DELETE_ADMIN_SUCCESS,
-  payload,
-});
+const deleteAdminSuccess = (payload) => ({ type: DELETE_ADMIN_SUCCESS, payload });
 const deleteAdminFailure = () => ({ type: DELETE_ADMIN_FAILURE });
 const getCategoriesRequest = () => ({ type: GET_CATEGORIES_REQUEST });
-const getCategoriesSuccess = (payload) => ({
-  type: GET_CATEGORIES_SUCCESS,
-  payload,
-});
+const getCategoriesSuccess = (payload) => ({ type: GET_CATEGORIES_SUCCESS, payload });
 const getOrdersRequest = () => ({ type: GET_ORDERS_REQUEST });
 const getOrdersSuccess = (payload) => ({ type: GET_ORDERS_SUCCESS, payload });
 const getOrdersFailure = () => ({ type: GET_ORDERS_FAILURE });
@@ -92,8 +67,7 @@ const getCartsSuccess = (payload) => ({ type: GET_CARTS_SUCCESS, payload });
 
 export const getProducts = (dispatch) => {
   dispatch(getProductDataRequest());
-  axios
-    .get(`https://universal-mall-api.onrender.com/products`)
+  axios.get(`https://universal-mall-api.onrender.com/products`)
     .then((res) => {
       dispatch(getProductDataSuccess(res.data));
     })
@@ -105,10 +79,7 @@ export const getProducts = (dispatch) => {
 export const addProduct = (product) => async (dispatch) => {
   dispatch(addProductRequest());
   try {
-    const { data } = await axios.post(
-      "https://paytmmallserver.onrender.com/product",
-      product
-    );
+    const { data } = await axios.post("https://universal-mall-api.onrender.com/products", product);
     dispatch(addProductSuccess(data));
     return data;
   } catch (error) {
@@ -119,7 +90,7 @@ export const addProduct = (product) => async (dispatch) => {
 export const deleteProduct = (id) => async (dispatch) => {
   dispatch(deleteProductRequest());
   try {
-    axios.delete(`https://paytmmallserver.onrender.com/product/${id}`);
+    axios.delete(`https://universal-mall-api.onrender.com/products/${id}`);
     dispatch(deleteProductSuccess(id));
   } catch (error) {
     dispatch(deleteProductFailure(error));
@@ -128,10 +99,7 @@ export const deleteProduct = (id) => async (dispatch) => {
 export const updateProduct = (product) => async (dispatch) => {
   dispatch(updateProductRequest());
   try {
-    const { data } = await axios.patch(
-      `https://paytmmallserver.onrender.com/product/${product.id}`,
-      product
-    );
+    const { data } = await axios.patch(`https://universal-mall-api.onrender.com/products/${product.id}`, product);
     dispatch(updateProductSuccess(data));
   } catch (error) {
     dispatch(updateProductFailure(error));
@@ -153,9 +121,7 @@ export const getUsersList = async (dispatch) => {
 export const deleteUser = (id) => async (dispatch) => {
   dispatch(deleteUserRequest());
   try {
-    let res = await axios.delete(
-      `https://paytmmallserver.onrender.com/users/${id}`
-    );
+    let res = await axios.delete(`https://universal-mall-api.onrender.com/users/${id}`);
     dispatch(deleteUserSuccess(id));
     return res;
   } catch (error) {
@@ -166,9 +132,7 @@ export const deleteUser = (id) => async (dispatch) => {
 export const getAdminList = async (dispatch) => {
   dispatch(getAdminListRequest());
   try {
-    const { data } = await axios.get(
-      "https://paytmmallserver.onrender.com/admins"
-    );
+    const { data } = await axios.get("https://universal-mall-api.onrender.com/admins");
     dispatch(getAdminListSuccess(data));
   } catch (error) {
     dispatch(getAdminListFailure(error));
@@ -177,10 +141,7 @@ export const getAdminList = async (dispatch) => {
 export const addAdmin = (admin) => async (dispatch) => {
   dispatch(addAdminRequest());
   try {
-    let { data } = await axios.post(
-      "https://paytmmallserver.onrender.com/admins",
-      admin
-    );
+    let { data } = await axios.post("https://universal-mall-api.onrender.com/admins",admin);
     dispatch(addAdminSuccess(data));
     return data;
   } catch (error) {
@@ -191,7 +152,7 @@ export const deleteAdmin = (id) => async (dispatch) => {
   dispatch(deleteAdminRequest());
   try {
     let { data } = await axios.delete(
-      `https://paytmmallserver.onrender.com/admins/${id}`
+      `https://universal-mall-api.onrender.com/admins/${id}`
     );
     dispatch(deleteAdminSuccess(id));
     return data;
@@ -201,9 +162,7 @@ export const deleteAdmin = (id) => async (dispatch) => {
 };
 
 const getAllCategories = async () => {
-  let { data } = await axios.get(
-    "https://paytmmallserver.onrender.com/product"
-  );
+  let { data } = await axios.get("https://universal-mall-api.onrender.com/products");
   const categories = [];
   data.forEach((product) => {
     if (!categories.includes(product.category))
@@ -214,9 +173,7 @@ const getAllCategories = async () => {
 export const getCategories = async (dispatch) => {
   dispatch(getCategoriesRequest());
   const allCategories = await getAllCategories();
-  const { data } = await axios.get(
-    "https://paytmmallserver.onrender.com/users"
-  );
+  const { data } = await axios.get("https://paytmmallserver.onrender.com/users");
   let obj = {};
   data.map(({ orders }) =>
     orders.forEach((order) => {
@@ -230,53 +187,33 @@ export const getCategories = async (dispatch) => {
 export const getOrders = async (dispatch) => {
   dispatch(getOrdersRequest());
   try {
-    const { data } = await axios.get(
-      "https://paytmmallserver.onrender.com/users"
-    );
-    let ordersDetails = [];
-    data.forEach(({ orders }) =>
-      orders.forEach((o) => {
-        ordersDetails.push(o);
-      })
-    );
-    dispatch(getOrdersSuccess(ordersDetails));
+    const { data } = await axios.get("https://universal-mall-api.onrender.com/orders");
+    dispatch(getOrdersSuccess(data));
   } catch (error) {
     dispatch(getOrdersFailure(error));
   }
 };
 
 export const pendingOrder = (userId, id) => async (dispatch) => {
-  const { data } = await axios.get(
-    `https://paytmmallserver.onrender.com/users/${userId}`
-  );
-  let updatedOrders = [];
-  data.orders.forEach((order) => {
-    if (order.id === id) {
-      const updateOrder = { ...order, status: "Delayed" };
-      updatedOrders.push(updateOrder);
-    } else updatedOrders.push(order);
+  const { data } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
+  data.forEach((order)=>{
+    if ( order.userId===userId && order.id === id) {
+      const updatedOrder={...order,status:''}
+      axios.patch(`https://universal-mall-api.onrender.com/orders?id=${id}&userId=${userId}`,{status: "Delayed"});
+    }
   });
   // for now I am dispatching again the orders for UI Updation
-  await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, {
-    orders: updatedOrders,
-  });
   dispatch(getOrders);
 };
 
 export const passOrder = (userId, id) => async (dispatch) => {
-  const { data } = await axios.get(
-    `https://paytmmallserver.onrender.com/users/${userId}`
-  );
-  let updatedOrders = [];
-  data.orders.forEach((order) => {
-    if (order.id === id) {
-      const updateOrder = { ...order, status: "Passed" };
-      updatedOrders.push(updateOrder);
-    } else updatedOrders.push(order);
+  const { data } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
+  data.forEach((order) => {
+    if ( order.userId===userId && order.id === id) {
+      axios.patch(`https://universal-mall-api.onrender.com/orders?id=${id}&userId=${userId}`,{status: "Passed"});
+    }
   });
-  await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, {
-    orders: updatedOrders,
-  });
+  // for now I am dispatching again the orders for UI Updation
   dispatch(getOrders);
 };
 

@@ -13,6 +13,7 @@ const ManageOrders = () => {
   // iv) Then we can get the orders form the order.
 
   const {isLoadingOrders,isErrorOrders,orders}=useSelector(state=>state.AdminReducer);
+  console.log(orders)
   const dispatch=useDispatch();
   console.log(orders)
   useEffect(()=>{
@@ -23,7 +24,6 @@ const ManageOrders = () => {
   //   {brand :"MANSIYAORANGE",category:"jwellery",description:"MeenakariBrassDangleEarring",discountPrice:"299",id:1,img:"https://assetscdn1.paytm.com/images/catalog/product/J/JE/JEWMANSIYAORANGMANS31895221C53E46/1568718205220_0..jpg?imwidth=282&impolicy=hq",originalPrice:"999-70%",status:"pending",userId:1,useremail:"bipin@gmail.com",username:"Bipin"}
   // ]
   // // let updatedOrders2=
-
 
   return (
     <div>
