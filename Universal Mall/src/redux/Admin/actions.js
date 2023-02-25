@@ -26,11 +26,12 @@ import {
   GET_ORDERS_SUCCESS,
   GET_ORDERS_FAILURE,
   GET_CARTS_SUCCESS,
-  UPDATE_ORDER_REQUEST,
-  UPDATE_ORDER_SUCCESS,
-  UPDATE_ORDER_FAILURE,
 } from "./actiontypes";
-import { GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS, GET_PRODUCTS_FAILURE} from "../App/actiontypes";
+import {
+  GET_PRODUCTS_REQUEST,
+  GET_PRODUCTS_SUCCESS,
+  GET_PRODUCTS_FAILURE,
+} from "../App/actiontypes";
 import axios from "axios";
 
 const getProductDataRequest = () => ({ type: GET_PRODUCTS_REQUEST });
@@ -86,18 +87,13 @@ const getCategoriesSuccess = (payload) => ({
 const getOrdersRequest = () => ({ type: GET_ORDERS_REQUEST });
 const getOrdersSuccess = (payload) => ({ type: GET_ORDERS_SUCCESS, payload });
 const getOrdersFailure = () => ({ type: GET_ORDERS_FAILURE });
-const updateOrderRequest = () => ({ type: UPDATE_ORDER_REQUEST });
-const updateOrderSuccess = (payload) => ({
-  type: UPDATE_ORDER_SUCCESS,
-  payload,
-});
-const updateOrderFailure = () => ({ type: UPDATE_ORDER_FAILURE });
+
 const getCartsSuccess = (payload) => ({ type: GET_CARTS_SUCCESS, payload });
 
 export const getProducts = (dispatch) => {
   dispatch(getProductDataRequest());
   axios
-    .get(`https://paytmmallserver.onrender.com/product`)
+    .get(`https://universal-mall-api.onrender.com/products`)
     .then((res) => {
       dispatch(getProductDataSuccess(res.data));
     })
@@ -223,7 +219,7 @@ export const getCategories = async (dispatch) => {
   );
   let obj = {};
   data.map(({ orders }) =>
-    orders.map((order) => {
+    orders.forEach((order) => {
       if (!obj[order.category]) obj[order.category] = 1;
       else obj[order.category]++;
     })
@@ -258,15 +254,12 @@ export const pendingOrder = (userId, id) => async (dispatch) => {
     if (order.id === id) {
       const updateOrder = { ...order, status: "Delayed" };
       updatedOrders.push(updateOrder);
-    } else {
-      updatedOrders.push(order);
-    }
+    } else updatedOrders.push(order);
   });
   // for now I am dispatching again the orders for UI Updation
-  const res = await axios.patch(
-    `https://paytmmallserver.onrender.com/users/${userId}`,
-    { orders: updatedOrders }
-  );
+  await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, {
+    orders: updatedOrders,
+  });
   dispatch(getOrders);
 };
 
@@ -279,14 +272,11 @@ export const passOrder = (userId, id) => async (dispatch) => {
     if (order.id === id) {
       const updateOrder = { ...order, status: "Passed" };
       updatedOrders.push(updateOrder);
-    } else {
-      updatedOrders.push(order);
-    }
+    } else updatedOrders.push(order);
   });
-  const res = await axios.patch(
-    `https://paytmmallserver.onrender.com/users/${userId}`,
-    { orders: updatedOrders }
-  );
+  await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, {
+    orders: updatedOrders,
+  });
   dispatch(getOrders);
 };
 
@@ -303,10 +293,9 @@ export const rejectOrder = (userId, id) => async (dispatch) => {
       updatedOrders.push(order);
     }
   });
-  const res = await axios.patch(
-    `https://paytmmallserver.onrender.com/users/${userId}`,
-    { orders: updatedOrders }
-  );
+  await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, {
+    orders: updatedOrders,
+  });
   dispatch(getOrders);
 };
 

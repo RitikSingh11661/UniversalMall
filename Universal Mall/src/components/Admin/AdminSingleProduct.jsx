@@ -8,12 +8,15 @@ import { useRef } from 'react';
 const SingleProduct = ({ product }) => {
   const formRef=useRef(product)
   const dispatch = useDispatch();
-  const price = product.originalPrice.split('-');
   const [showEdit, setShowEdit] = useState(false);
   const toast = useToast();
   const [step, setStep] = useState(1);
   const [progress, setProgress] = useState(50);
-  
+  const options = {style: 'currency',currency: 'INR'};
+  const price = product.originalPrice-product.discountPrice
+  let priceWithString =price.toLocaleString('en-IN',options);
+  const disocuntPercentage = ((price/product.originalPrice)*100).toFixed();
+
   const formChangeHandler = (e) => {
     const { name, value } = e.target;
     formRef.current[name]=value;
@@ -145,30 +148,16 @@ const SingleProduct = ({ product }) => {
         <Box
           rounded={'lg'}
           pos={'relative'}
-          _after={{
-            transition: 'all .3s ease',
-            content: '""',
-            w: 'full',
-            h: 'full',
-            pos: 'absolute',
-            top: 5,
-            left: 0,
-            filter: 'blur(15px)',
-            zIndex: -1,
-          }}
-          _groupHover={{
-            _after: {
-              filter: 'blur(20px)',
-            },
-          }}>
+          _after={{transition:'all.3sease',content:'""',w:'full',h:'full',pos:'absolute',top:5,left:0,filter:'blur(15px)',zIndex:-1}}
+          _groupHover={{_after: {filter: 'blur(20px)'}}}>
           <Image rounded={'lg'} boxSize={150} objectFit={'cover'} src={product.img} />
         </Box>
         <Stack align={'center'}>
           <Heading fontSize={'md'} fontFamily={'body'} fontWeight={500}>{product.description}</Heading>
           <Stack direction={'row'} align={'center'}>
-            <Text fontWeight={800} fontSize={'md'}>₹{product.discountPrice}</Text>
-            <Text textDecoration={'line-through'} color={'gray.600'} textDecor='line-through'>₹{price[0]}</Text>
-            <Text color='green.400'>{price[1]}</Text>
+            <Text fontWeight={800} fontSize={'md'}>{priceWithString}</Text>
+            <Text textDecoration={'line-through'} color={'gray.600'} textDecor='line-through'>₹{product.originalPrice}</Text>
+            <Text color='green.400'>{disocuntPercentage}%</Text>
           </Stack>
         </Stack>
         <Flex justifyContent={'space-evenly'}>
