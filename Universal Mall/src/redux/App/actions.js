@@ -11,7 +11,7 @@ const getProductstFailure=()=>({type:GET_PRODUCTS_FAILURE});
 export const getProduct = (param) => (dispatch) =>{
       dispatch(getProductsRequest());
       axios.get("https://universal-mall-api.onrender.com/products",param).then((res)=>{
-           console.log(res.data)
+        //    console.log(res.data)
           dispatch(getProductsSuccess(res.data))
       }).catch((err)=>{
           dispatch(getProductstFailure());

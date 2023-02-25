@@ -21,23 +21,53 @@ export const Product = () => {
             brand: searchParams.getAll("category"),
             _sort: searchParams.get("order") && "discountPrice",
             _order: searchParams.get("order"),
-            _page: page
+            _page: page,
+            _limit: 12
         },
     };
 
     useEffect(() => {
         dispatch(getProduct(obj));
-    }, [location.search,page])
+    }, [location.search, page])
 
 
     return (
         <div>
-            <Flex>
-                <Box w="20%" h="100%" bg="gray.100">
+            <Flex direction={{
+                base: "column",
+                sm: "column",
+                md: "column",
+                lg: "row",
+            }}>
+                <Box w={{
+                    base: "100%",
+                    sm: "100%",
+                    md: "100%",
+                    lg: "25%",
+                }}
+                    p={5}
+                    
+                    top={{
+                        base: "10%",
+                        lg: "20%",
+                    }}>
                     <Sidebar></Sidebar>
                 </Box>
-                <Box flex="1" p="20px" >
-                    <Grid templateColumns='repeat(4, 1fr)' gap={6}
+                <Box flex="1" p="20px"
+                    w={{
+                        base: "100%",
+                        sm: "100%",
+                        md: "100%",
+                        lg: "70%",
+                    }}
+                >
+                    <Grid gap={5} 
+                        templateColumns={{
+                            base: "repeat(1, 1fr)",
+                            sm: "repeat(2, 1fr)",
+                            md: "repeat(3, 1fr)",
+                            lg: "repeat(4, 1fr)",
+                        }}
                     >
                         {products.length > 0 && products.map((el) => {
                             return <ProductCard key={el.id} product={el}></ProductCard>;

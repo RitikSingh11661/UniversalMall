@@ -5,28 +5,31 @@ import { Box, Button, Image, Text } from "@chakra-ui/react";
 
 export const ProductCard = ({ product }) => {
     return (
-        <Box>
+        <>
             <Link to={`/products/${product.id}`}>
-                <Box p="5" boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px" borderRadius="md">
+                <Box p="2" h="17rem" boxShadow="md" rounded="md">
                     <Image
                         src={product.img}
                         alt={product.description}
-
+                        m="auto"
                         p="1"
                         rounded="md"
                         bg="white"
-                        h="250px"
+                        h="55%"
 
                     />
-                    Price :  <Text as={"b"} fontSize="1.3rem">₹{product.discountPrice}</Text>
-
+                    <br />
+                    <Text color={"grey 0.5"}>Brand : {product.brand}</Text>
+                   
+                   
+                    <Text color={'green'}>Discount : {Math.round(product.discountPrice / product.originalPrice * 100)}%</Text>
+                    <Text as={"b"} fontSize="1.2rem">₹{product.discountPrice} </Text>
                     <Text as={"s"}>₹{product.originalPrice}</Text>
-                    <br />
-                    <Text color={"grey"}>Brand : {product.brand}</Text>
-                    <br />
-                    <Text >Product info: {product.description}</Text>
 
-                </Box></Link>
-        </Box>
+                    
+
+                </Box>
+            </Link>
+        </>
     )
 }
