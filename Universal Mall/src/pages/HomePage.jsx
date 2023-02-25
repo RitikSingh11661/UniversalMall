@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom'
 
 export const HomePage = () => {
   const store=useSelector(store=>store);
-  // console.log(store)
   const [userDetails, setUserDetails] = useState({})
   const navigate=useNavigate();
 
