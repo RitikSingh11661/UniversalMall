@@ -1,10 +1,5 @@
 import React from 'react'
-import Brand from './Brand'
-import Footer from './Footer'
-import Grocery from './Grocery'
-import Jewellery from './Jewellery'
-import Navbar from './Navbar'
-
+import { useSelector } from 'react-redux'
 
 function HomePage() {
   return (
