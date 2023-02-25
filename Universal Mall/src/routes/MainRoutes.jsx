@@ -9,8 +9,6 @@ import { Orders } from '../pages/Orders';
 import { Cart } from '../pages/Cart';
 import { NotFound } from '../pages/NoteFound';
 import { Admin } from '../pages/Admin';
-import { SingleProductPage } from '../pages/SingleProductPage';
-
 
 const MainRoutes = () => {
   return (
