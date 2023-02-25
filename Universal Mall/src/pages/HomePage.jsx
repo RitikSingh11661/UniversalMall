@@ -1,16 +1,15 @@
-import React from 'react'
+import React, {useState } from 'react'
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
-function HomePage() {
+export const HomePage = () => {
+  const store=useSelector(store=>store);
+  const [userDetails, setUserDetails] = useState({})
+  const navigate=useNavigate();
+
   return (
     <div>
-      <Navbar/>
-      <Brand/>
-      <Grocery/>
-      <Jewellery/>
-      <Footer/>
+      <h2>HomePge</h2>
     </div>
   )
 }
-
-export default HomePage
