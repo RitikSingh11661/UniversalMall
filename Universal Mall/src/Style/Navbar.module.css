@@ -1,7 +1,7 @@
 #imgr{
  width: 100%;
  height: 110px;
- border: 1px solid red;   
+ border: 1px solid transparent;   
 }
 #imgr>img{
     width: 110px;
@@ -9,32 +9,32 @@
     margin: auto;
 }
 #nav{
-    border: 1px solid red;
+    border: 1px solid transparent;
     width: 100%;
     height: 50px;
     display: flex;
     gap: 10px;
 }
 #nav>div:nth-child(1){
-    border: 1px solid red;
+    border: 1px solid transparent;
     width: 50%;
     height: 50px;
     margin-left: 150px;
 }
 #nav>div:nth-child(2){
-    border: 1px solid red;
+    border: 1px solid transparent;
     width: 150px;
     display: flex;
 
 }
 #nav>div:nth-child(3){
-    border: 1px solid red;
+    border: 1px solid transparent;
     width: 150px;
     display: flex;
 
 }
 #nav>div:nth-child(4){
-    border: 1px solid red;
+    border: 1px solid transparent;
     width: 150px;
     display: flex;
 
