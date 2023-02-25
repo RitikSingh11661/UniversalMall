@@ -1,10 +1,16 @@
-import React, {useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 
-export const HomePage = () => {
-  const store=useSelector(store=>store);
-  console.log(store)
+function HomePage() {
   return (
-    <div>HomePage</div>
+    <div>
+      <Navbar/>
+      <Brand/>
+      <Grocery/>
+      <Jewellery/>
+      <Footer/>
+    </div>
   )
 }
+
+export default HomePage
