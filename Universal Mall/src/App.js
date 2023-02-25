@@ -1,10 +1,12 @@
 import './App.css';
-import MainRoutes from './routes/MainRoutes';
+import HomePage  from './pages/HomePage';
+import Style from "../src/Style/Brand.module.css"
 
 function App() {
   return (
     <div className="App">
-      <MainRoutes/>
+      {/* <HomePage/> */}
+      <HomePage/>
     </div>
   );
 }
