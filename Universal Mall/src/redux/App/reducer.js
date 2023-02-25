@@ -1,7 +1,4 @@
-import { GET_PRODUCTS_FAILURE, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS 
-
-
-} from "./actiontypes";
+import { GET_PRODUCTS_FAILURE, GET_PRODUCTS_REQUEST, GET_PRODUCTS_SUCCESS } from "./actiontypes";
 
 const initialState = {isLoading:false,products:[],isError:false}
 export const reducer=(state=initialState,{type,payload})=>{

@@ -68,12 +68,8 @@ const getCartsSuccess = (payload) => ({ type: GET_CARTS_SUCCESS, payload });
 export const getProducts = (dispatch) => {
   dispatch(getProductDataRequest());
   axios.get(`https://universal-mall-api.onrender.com/products`)
-    .then((res) => {
-      dispatch(getProductDataSuccess(res.data));
-    })
-    .catch((err) => {
-      dispatch(getProductDataFailure());
-    });
+    .then((res) =>dispatch(getProductDataSuccess(res.data)))
+    .catch(()=>dispatch(getProductDataFailure()));
 };
 
 export const addProduct = (product) => async (dispatch) => {
@@ -110,7 +106,7 @@ export const getUsersList = async (dispatch) => {
   dispatch(getUserListRequest());
   try {
     const { data } = await axios.get(
-      "https://paytmmallserver.onrender.com/users"
+      "https://universal-mall-api.onrender.com/users"
     );
     dispatch(getUserListSuccess(data));
   } catch (error) {
@@ -122,6 +118,7 @@ export const deleteUser = (id) => async (dispatch) => {
   dispatch(deleteUserRequest());
   try {
     let res = await axios.delete(`https://universal-mall-api.onrender.com/users/${id}`);
+    console.log(res)
     dispatch(deleteUserSuccess(id));
     return res;
   } catch (error) {
@@ -173,14 +170,13 @@ const getAllCategories = async () => {
 export const getCategories = async (dispatch) => {
   dispatch(getCategoriesRequest());
   const allCategories = await getAllCategories();
-  const { data } = await axios.get("https://paytmmallserver.onrender.com/users");
+  const { data:orders } = await axios.get("https://universal-mall-api.onrender.com/orders");
   let obj = {};
-  data.map(({ orders }) =>
     orders.forEach((order) => {
       if (!obj[order.category]) obj[order.category] = 1;
       else obj[order.category]++;
-    })
-  );
+    });
+    console.log(allCategories,obj)
   dispatch(getCategoriesSuccess([allCategories, obj]));
 };
 
@@ -194,57 +190,40 @@ export const getOrders = async (dispatch) => {
   }
 };
 
-export const pendingOrder = (userId, id) => async (dispatch) => {
-  const { data } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
-  data.forEach((order)=>{
-    if ( order.userId===userId && order.id === id) {
-      const updatedOrder={...order,status:''}
-      axios.patch(`https://universal-mall-api.onrender.com/orders?id=${id}&userId=${userId}`,{status: "Delayed"});
+export const pendingOrder = (orderId) => async (dispatch) => {
+  const { data:orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
+  orders.forEach((order)=>{
+    if (order.id === orderId) {
+      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`,{status:'Delayed'}).then(()=>dispatch(getOrders));
     }
-  });
-  // for now I am dispatching again the orders for UI Updation
-  dispatch(getOrders);
+  });  
 };
 
-export const passOrder = (userId, id) => async (dispatch) => {
-  const { data } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
-  data.forEach((order) => {
-    if ( order.userId===userId && order.id === id) {
-      axios.patch(`https://universal-mall-api.onrender.com/orders?id=${id}&userId=${userId}`,{status: "Passed"});
+export const passOrder = (orderId) => async (dispatch) => {
+  const { data:orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
+  orders.forEach((order)=>{
+    if (order.id === orderId) {
+      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`,{status:'Passed'}).then(()=>dispatch(getOrders));
+      // axios.put(`https://universal-mall-api.onrender.com/orders/${orderId}`,updatedOrder).then(()=>dispatch(getOrders));
     }
-  });
-  // for now I am dispatching again the orders for UI Updation
-  dispatch(getOrders);
+  });  
 };
 
-export const rejectOrder = (userId, id) => async (dispatch) => {
-  const { data } = await axios.get(
-    `https://paytmmallserver.onrender.com/users/${userId}`
-  );
-  let updatedOrders = [];
-  data.orders.forEach((order) => {
-    if (order.id === id) {
-      const updateOrder = { ...order, status: "Rejected" };
-      updatedOrders.push(updateOrder);
-    } else {
-      updatedOrders.push(order);
+export const rejectOrder = (orderId) => async (dispatch) => {
+  const { data:orders } = await axios.get(`https://universal-mall-api.onrender.com/orders`);
+  orders.forEach((order)=>{
+    if (order.id === orderId) {
+      axios.patch(`https://universal-mall-api.onrender.com/orders/${orderId}`,{status:'Rejected'}).then(()=>dispatch(getOrders));
     }
-  });
-  await axios.patch(`https://paytmmallserver.onrender.com/users/${userId}`, {
-    orders: updatedOrders,
-  });
-  dispatch(getOrders);
+  });  
 };
 
 export const getCarts = async (dispatch) => {
-  const { data } = await axios.get(
-    "https://paytmmallserver.onrender.com/users"
-  );
+  const { data:carts } = await axios.get("https://universal-mall-api.onrender.com/carts");
   let cartDetails = [];
-  data.forEach(({ cart }) =>
-    cart.forEach((c) => {
+    carts.forEach((c) => {
       cartDetails.push(c);
-    })
-  );
+    });
+    console.log('cartDetails',cartDetails)
   dispatch(getCartsSuccess(cartDetails));
 };

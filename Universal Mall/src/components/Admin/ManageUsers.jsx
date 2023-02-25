@@ -6,26 +6,26 @@ import { FiUserX } from 'react-icons/fi';
 
 const ManageUsers = () => {
   const { isLoadingUserList, isErrorUserList, users,orders,carts} = useSelector(store => store.AdminReducer);
-  let {total,totalProfit} = useSelector(store => store.AdminReducer);
+  let total=0,totalProfit=0;
   const dispatch = useDispatch();
   const toast = useToast();
 
   const handleDelete = (user) => {
     try {
-      dispatch(deleteUser(user.id));
+      dispatch(deleteUser(user.userId?user.userId:user.id));
       toast({
         title: 'User Deleted',
-        description: `${user.name} has been deleted successfully`,
+        description: `${user.username?user.username:user.name} has been deleted successfully`,
         status: 'success',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
       })
     } catch (error) {
       toast({
         title: 'Error while deleting',
-        description: `${user.name} has not deleted`,
+        description: `${user.username?user.username:user.name} has not deleted`,
         status: 'error',
-        duration: 4000,
+        duration: 2000,
         isClosable: true,
       })
     }
@@ -35,9 +35,27 @@ const ManageUsers = () => {
     dispatch(getUsersList)
     dispatch(getOrders)
     dispatch(getCarts)
-  }, []);
+  }, [dispatch]);
+
   // why my this componet is rednering 2 extra times?
   // console.log('manage uses list page rendering')
+ 
+  const totalArray=[]
+  orders.forEach((order,i)=>{
+     if(!totalArray.some(obj=>obj.useremail===order.useremail)){
+       const user={id:order.id,userId:order.userId,username:order.username,useremail:order.useremail,orderQuantity:1,totalOrderPrice:order.originalPrice-order.discountPrice};
+       totalArray.push(user)
+     }else{
+       totalArray.some((obj)=>{
+        obj.totalOrderPrice=obj.totalOrderPrice+(order.originalPrice-order.discountPrice);
+        obj.orderQuantity=obj.orderQuantity+1;
+        })
+      }
+     total+=order.originalPrice-order.discountPrice;
+    });
+  users.forEach((user)=>{
+    if(!totalArray.some(obj=>obj.username===user.name))totalArray.push(user)
+  })
 
   return (
     <div>
@@ -58,17 +76,15 @@ const ManageUsers = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {users.map((user) => {
-                let Singletotal=0;
-                user.orders.forEach((order=>Singletotal+=(+order.discountPrice)));
-                total += Singletotal;
+              {totalArray.map((user) => {
+                console.log(user)
                 totalProfit += 100;
                 return <Tr key={user.id}>
-                  <Td>{user.name}</Td>
-                  <Td >{user.orders.length}</Td>
-                  <Td>{user.cart.length}</Td>
-                  <Td >{'₹' + Singletotal}</Td>
-                  <Td >{'₹' + 100}</Td>
+                  <Td>{user?.username?user.username:user.name}</Td>
+                  <Td >{user?.orderQuantity?user.orderQuantity:0}</Td>
+                  <Td>{0}</Td>
+                  <Td >₹{user?.totalOrderPrice?user.totalOrderPrice:0}</Td>
+                  <Td >₹{totalProfit}</Td>
                   <Td><IconButton aria-label='Delete database' onClick={() => handleDelete(user)} icon={<FiUserX />} /></Td>
                 </Tr>
               })}

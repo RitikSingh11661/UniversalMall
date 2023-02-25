@@ -53,8 +53,6 @@ const inisitalState = {
   isErrorAdminAdd: false,
   totalCarts: 0,
   carts: [],
-  totalProfit: 0,
-  total: 0,
   categories: { allCategories: [], usersCategories: {} },
   isLoadingCategories: false,
   orders: [],
@@ -114,10 +112,9 @@ const reducer = (state = inisitalState, { type, payload }) => {
     case DELETE_USER_REQUEST:
       return { ...state, isLoadingUserDelete: true };
     case DELETE_USER_SUCCESS:
+      console.log(payload)
       return {
-        ...state,
-        isLoadingUserDelete: false,
-        users: state.users.filter((user) => user.id !== payload),
+        ...state,isLoadingUserDelete: false,users: state.users.filter((user) => user.id !== payload),
       };
     case DELETE_USER_FAILURE:
       return { ...state, isLoadingUserDelete: false, isErrorUserDelete: true };
