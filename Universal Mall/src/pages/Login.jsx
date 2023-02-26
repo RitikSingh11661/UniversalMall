@@ -1,9 +1,23 @@
-import { Flex, Box, FormControl, FormLabel, Input, Checkbox, Stack, Button, Heading, Text, useToast } from "@chakra-ui/react";
+import {
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  Checkbox,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useToast,
+} from "@chakra-ui/react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getUsers, setLogin } from "../redux/Auth/actions";
+import Loading from "../components/Loading";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
@@ -12,18 +26,24 @@ export const Login = () => {
   const toast = useToast();
   const dispatch = useDispatch();
   let users = useSelector((store) => store.AuthReducer.users);
+  const loading = useSelector((store) => store.AuthReducer.isLoading);
   const navigate = useNavigate();
   const location = useLocation();
   const comingFrom = location.state?.from?.pathname || "/";
+  const isAuth = useSelector((store) => store.AuthReducer.isAuth);
+
 
   useEffect(() => {
     dispatch(getUsers);
   }, []);
 
-  // with normal api
+  // console.log(users);
   const handleSubmit = (e) => {
     e.preventDefault();
-    let check = users.find(el=> el.email === email && el.password === password);
+
+    let check = users.find((el) => {
+      return el.email === email && el.password === password;
+    });
     console.log(check);
     localStorage.setItem("userId", check.id)
     if (check) {
@@ -48,12 +68,25 @@ export const Login = () => {
       });
     }
   };
+  console.log(isAuth);
 
-  return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"} bg={"gray.50"} m="auto">
+
+
+  return loading ? (
+    <Loading />
+  ) : (
+    <Flex
+      minH={"100vh"}
+      align={"center"}
+      justify={"center"}
+      bg={"gray.50"}
+      m="auto"
+    >
       <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
         <Stack align={"center"}>
-          <Heading color={"#002E6E"} fontSize={"4xl"}>Log in to your account</Heading>
+          <Heading color={"#002E6E"} fontSize={"4xl"}>
+            Log in to your account
+          </Heading>
         </Stack>
         <Box rounded={"lg"} bg={"gray.50"} boxShadow={"lg"} p={8}>
           <form onSubmit={handleSubmit}>
@@ -115,5 +148,6 @@ export const Login = () => {
         </Box>
       </Stack>
     </Flex>
-  )
+  );
 }
+
