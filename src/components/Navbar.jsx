@@ -73,7 +73,7 @@ const Navbar = () => {
     }
   });
 
-  const handleAuth = () => {
+  const handleLogout = () => {
     dispatch(setLogout);
   };
 
@@ -282,7 +282,7 @@ const Navbar = () => {
                 alt=""
               />
               <Text
-                onClick={handleAuth}
+                onClick={handleLogout}
                 fontSize={{ base: "6px", sm: "md", lg: "md" }}
               >
                 Logout

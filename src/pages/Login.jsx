@@ -32,7 +32,6 @@ export const Login = () => {
   const comingFrom = location.state?.from?.pathname || "/";
   const isAuth = useSelector((store) => store.AuthReducer.isAuth);
 
-
   useEffect(() => {
     dispatch(getUsers);
   }, []);
@@ -41,11 +40,9 @@ export const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    let check = users.find((el) => {
-      return el.email === email && el.password === password;
-    });
-    console.log(check);
-    localStorage.setItem("userId", check.id)
+    let check = users.find(el => el.email === email && el.password === password);
+    // console.log(check);
+    if(check)localStorage.setItem("userId", check.id);
     if (check) {
       toast({
         title: "Login Successfully.",
@@ -58,6 +55,7 @@ export const Login = () => {
       dispatch(setLogin);
       navigate(comingFrom, { replace: true })
     } else {
+      console.log('wrong')
       toast({
         title: "Wrong Creadentials.",
         description: `Please register ${email}`,
@@ -69,8 +67,6 @@ export const Login = () => {
     }
   };
   console.log(isAuth);
-
-
 
   return loading ? (
     <Loading />

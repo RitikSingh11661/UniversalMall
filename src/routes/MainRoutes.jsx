@@ -20,10 +20,10 @@ const MainRoutes = () => {
         <Route path='*' element={<NotFound />} />
         <Route path='/login' element={<Login />} />
         <Route path='/products' element={<Product></Product>}></Route>
-        <Route path='/cart' element={<Cart />} />
+        <Route path='/cart' element={<PrivateRoute><Cart /></PrivateRoute>} />
         <Route path='/orders' element={<PrivateRoute><Orders /></PrivateRoute>} />
         <Route path='/products/:id' element={<SingleProductPage />} />
-        <Route path='/admin' element={<Admin />} />
+        <Route path='/admin' element={<Admin/>}/>
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>

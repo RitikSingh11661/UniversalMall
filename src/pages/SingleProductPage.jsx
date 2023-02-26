@@ -13,7 +13,6 @@ import Footer from "../components/Footer";
 
 export const SingleProductPage = () => {
     const { id } = useParams();
-    const [singleData, setSingleData] = useState({});
     const dispatch = useDispatch();
     const Product = useSelector((store) => {
         return store.AppReducer.products;
@@ -25,7 +24,6 @@ export const SingleProductPage = () => {
         return el.id === +userid;
     })
 
-
     useEffect(() => {
         const newData = Product.find((el) => el.id === +id);
         setProductData(newData);
@@ -36,13 +34,10 @@ export const SingleProductPage = () => {
     }, [])
 
     const sendCart = () => {
-
-        // console.log("1",userData);
-        dispatch(addToCart(userid, userData, singleData)).then((res) => {
+        dispatch(addToCart(userData,productData)).then(() => {
             dispatch(getUsers)
         });
     }
-
 
     return (
         <div>

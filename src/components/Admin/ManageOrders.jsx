@@ -53,7 +53,7 @@ const ManageOrders = () => {
                 // console.log('buttonColor',buttonColor)
                 let colorProp='',one='',two='',three='';
                 // order.status==='Delayed'?one=theme.colors.blue[900]:order.status==='Passed'?two='green':order.status==='Rejected'?three=theme.colors.red[900]:colorProp="";
-                order.status==='Delayed'?one='blue[900]':order.status==='Passed'?two='green':order.status==='Rejected'?three='red':colorProp="";
+                order.status==='Delayed'?one='blue':order.status==='Passed'?two='green':order.status==='Rejected'?three='red':colorProp="";
                 return(
                 <Tr key={order.userId+order.id+v4()}>
                 <Td><Image src={order.img} alt={order.description} boxSize='90px' borderRadius='full' /></Td>
@@ -61,7 +61,7 @@ const ManageOrders = () => {
                 <Td>{order.category}</Td>
                 <Td>{order.username}</Td>
                 <Td>{order.useremail}</Td>
-                <Td><IconButton aria-label='Delay order' onClick={()=>dispatch(pendingOrder(order.id))} style={{color:one}} color={one} icon={<FiClock/>}/></Td>
+                <Td><IconButton aria-label='Delay order' onClick={()=>dispatch(pendingOrder(order.id))} color={one} icon={<FiClock/>}/></Td>
                 <Td><IconButton aria-label='Pass order' onClick={()=>dispatch(passOrder(order.id))} color={two} icon={<FiTruck/>}/></Td>
                 <Td><IconButton aria-label='Reject order' onClick={()=>dispatch(rejectOrder(order.id))} color={three} icon={<FiXOctagon/>}/></Td>
               </Tr>

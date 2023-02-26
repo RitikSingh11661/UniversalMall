@@ -5,9 +5,11 @@ import {
     DELETE_CART_FAILURE,
     DELETE_CART_REQUEST,
     DELETE_CART_SUCCESS,
+    GET_CART_SUCESS,
     GET_USER_FAILURE,
     GET_USER_REQUEST,
     GET_USER_SUCCESS,
+    ORDER_PLACED_SUCCESS,
     POST_SIGNIN_FAILURE,
     POST_SIGNIN_REQUEST,
     POST_SIGNIN_SUCCESS,
@@ -21,6 +23,7 @@ import {
     isAuth: key || false,
     isLoading: false,
     isError: false,
+    cart:[]
   };
   
   export const reducer = (state = initialState, { type, payload }) => {
@@ -41,10 +44,12 @@ import {
         return { ...state, isAuth: true };
       case SET_LOGOUT_REQUEST:
         return { ...state, isAuth: false };
+      case GET_CART_SUCESS:
+        return { ...state, isLoading: false, cart:payload };  
       case ADD_CART_REQUEST:
         return { ...state, isLoading: true };
       case ADD_CART_SUCCESS:
-        return { ...state, isLoading: false };
+        return { ...state, isLoading: false,cart:[...state.cart,payload] };
       case ADD_CART_FAILURE:
         return { ...state, isLoading: false, isError: true };
       case DELETE_CART_REQUEST:
@@ -53,6 +58,8 @@ import {
         return { ...state, isLoading: false };
       case DELETE_CART_FAILURE:
         return { ...state, isLoading: false, isError: true };
+      case ORDER_PLACED_SUCCESS:
+        return { ...state, isLoading: false,cart:[]};  
       default:
         return state;
     }

@@ -4,9 +4,7 @@ import { useState } from "react";
 
 const SingleCartItem = ({ id, brand, description, discountPrice, img, deleteItem }) => {
     const [counter, setCounter] = useState(1);
-
-
-
+    
     return (
         <Box display={"flex"} columnGap="20px" pt={"20px"}>
             <Box width="15%">
