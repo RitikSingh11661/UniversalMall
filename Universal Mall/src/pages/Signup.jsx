@@ -1,20 +1,20 @@
 import { Flex, Box, FormControl, FormLabel, Input, Stack, Button, Heading, Text, useToast } from "@chakra-ui/react";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {getUsers, signup} from "../redux/Auth/actions";
+import { getUsers, signup } from "../redux/Auth/actions";
 
-export const Signup=()=>{
-  const initUser={email:"",password:"",name:"",cart:[],orders:[]}
+export const Signup = () => {
+  const initUser = { email: "", password: "", name: "", cart: [], orders: [] }
   const [user, setUser] = useState(initUser);
   const toast = useToast();
   const dispatch = useDispatch();
   const users = useSelector((store) => store.AuthReducer.users);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const handleChange=(e)=>{
-    const {name,value}=e.target;
-    setUser({...user,[name]:value})
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value })
   }
 
   // normal with api
@@ -36,7 +36,7 @@ export const Signup=()=>{
     } else {
       dispatch(signup(user, newToastSucess, newToastFail)).then(() => {
         dispatch(getUsers);
-        console.log('render');
+        // console.log('render');
         navigate('/login')
       });
     }
@@ -45,7 +45,7 @@ export const Signup=()=>{
   useEffect(() => {
     dispatch(getUsers);
   }, []);
-  
+
   let newToastSucess = () => {
     return toast({
       title: "Successfully Logged In.",
@@ -97,7 +97,7 @@ export const Signup=()=>{
                   type="email"
                   name="email"
                   value={user.email}
-                  onChange={handleChange}   
+                  onChange={handleChange}
                   required
                 />
               </FormControl>
@@ -110,7 +110,7 @@ export const Signup=()=>{
                   type="password"
                   name="password"
                   value={user.password}
-                  onChange={handleChange}                 
+                  onChange={handleChange}
                   required
                 />
               </FormControl>

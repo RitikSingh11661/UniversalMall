@@ -1,27 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Box, Button, Grid, GridItem, Image, SimpleGrid, Text } from '@chakra-ui/react';
 import axios from 'axios';
 import { BsFillCartCheckFill } from "react-icons/bs";
 import { MdOutlineStars } from 'react-icons/md';
 import { VscWorkspaceTrusted } from 'react-icons/vsc';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { addToCart, getUsers } from '../redux/Auth/actions';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
 export const SingleProductPage = () => {
     const { id } = useParams();
+    const [singleData, setSingleData] = useState({});
+    const dispatch = useDispatch();
     const Product = useSelector((store) => {
         return store.AppReducer.products;
     });
     const [productData, setProductData] = useState({});
+    const users = useSelector(store => store.AuthReducer.users)
+    let userid = localStorage.getItem("userId")
+    let userData = users.find((el) => {
+        return el.id === +userid;
+    })
+
 
     useEffect(() => {
         const newData = Product.find((el) => el.id === +id);
         setProductData(newData);
+    }, [id])
+
+    useEffect(() => {
+        dispatch(getUsers)
     }, [])
+
+    const sendCart = () => {
+
+        // console.log("1",userData);
+        dispatch(addToCart(userid, userData, singleData)).then((res) => {
+            dispatch(getUsers)
+        });
+    }
+
 
     return (
         <div>
+            <Navbar></Navbar>
             <Box bg='#f4f4f4'>
 
                 <Box fontSize='xl'>SingleProductPage</Box>
@@ -45,7 +70,9 @@ export const SingleProductPage = () => {
 
                         </Box><Text fontSize='xs' color='gray'>inclusive of all Taxes</Text>
                         <Box mt='60px'>
-                            <Button className='addtocart' color='white' m='10px' background='#ef4e28' variant='solid' w='70%' >  Add To Cart  </Button>
+                            <Link to="/cart">
+                                <Button className='addtocart' color='white' m='10px' background='#ef4e28' variant='solid' w='70%' onClick={sendCart}>  Add To Cart  </Button>
+                            </Link>
                         </Box>
                     </Box>
                     <Box bg='#f4f4f4' m='40px' p='20px' borderRadius='8px' border='1px solid gray' align='left' w={{ base: '260px', sm: '250px', md: '200px', lg: 'max-content' }} h={{ base: '250px', sm: '300px', md: 'max-content', lg: 'max-content' }}>
@@ -56,56 +83,7 @@ export const SingleProductPage = () => {
                 </SimpleGrid>
 
                 {/* =====================================lower section========================================= */}
-                <SimpleGrid
-                    mt={{ base: '-30px', sm: '-20px', md: '50px', lg: '50px' }}
-
-                    className="spp_foot"
-                    columns={{ base: 1, md: 4, lg: 4 }}
-                    w='100%'
-                    gap='10'
-                    p='5px'
-
-                >
-                    <GridItem w="100%" >
-
-                        <Box align='center'><AiOutlineHeart size='20px' /></Box>
-
-                        <Text fontSize='md' color='gray' as='b'>24*7 Help</Text>
-                        <Text fontSize='xs' color='gray'>
-                            Need Help? Click Here. You can also talk to us on 0120 4606060 to
-                            resolve your query.
-                        </Text>
-                    </GridItem>
-                    <GridItem w="100%" >
-
-                        <Box align='center'><VscWorkspaceTrusted size='20px' /></Box>
-                        <Text fontSize='md' color='gray' as='b'>Paytm Trust</Text>
-                        <Text fontSize='xs' color='gray'>
-                            Your money is yours! All refunds come with no question asked
-                            guarantee.
-                        </Text>
-                    </GridItem>
-                    <GridItem w="100%" >
-
-                        <Box align='center'><MdOutlineStars size='20px' /></Box>
-                        <Text fontSize='md' color='gray' as='b'>100% Assurance</Text>
-                        <Text fontSize='xs' color='gray'>
-                            At Paytm, we provide 100% assurance. If you have any issue, your
-                            money is immediately refunded. Sit back and enjoy your shopping.
-                        </Text>
-                    </GridItem>
-                    <GridItem w="100%" mt={{ base: '20px', lg: '0px' }}>
-
-                        <Box align='center'><BsFillCartCheckFill size='20px' /></Box>
-                        <Text fontSize='md' color='gray' as='b'> Paytm Mall Promise</Text>
-                        <Text fontSize='xs' color='gray'>
-                            Products with this tag are quality checked, and shipped the same
-                            day from certified warehouses. So you get the right product,
-                            faster.
-                        </Text>
-                    </GridItem>
-                </SimpleGrid>
-
+               <Footer></Footer>
 
             </Box>
         </div>

@@ -79,7 +79,7 @@ import {
   export const signup = (user, newToastSucess, newToastFail) => (dispatch) => {
     dispatch(signupRequestAction());
     return axios
-      .post(`https://paytmmallserver.onrender.com/users`, user)
+      .post(`https://universal-mall-api.onrender.com/users`, user)
       .then((res) => {
         dispatch(signupSuccessAction());
         newToastSucess();
@@ -93,7 +93,7 @@ import {
   export const getUsers = (dispatch) => {
     dispatch(userRequestAction());
     axios
-      .get(`https://paytmmallserver.onrender.com/users`)
+      .get(`https://universal-mall-api.onrender.com/users`)
       .then((res) => {
         dispatch(userSuccessAction(res.data));
       })
@@ -121,7 +121,7 @@ import {
     // delete userData["id"]
   // console.log(id);
     dispatch(addRequestAction());
-    return axios.put(`https://paytmmallserver.onrender.com/users/${id}`,userData).then((res) => {
+    return axios.put(`https://universal-mall-api.onrender.com/users/${id}`,userData).then((res) => {
       dispatch(addSuccessAction());
     }).catch((err) => {
       dispatch(addFailureAction());
@@ -133,7 +133,7 @@ import {
   export const deleteCartData = (id, cart, userData) => (dispatch) => {
     userData.cart = cart
     dispatch(deleteRequestAction());
-    return axios.put(`https://paytmmallserver.onrender.com/users/${id}`, userData).then(() => {
+    return axios.put(`https://universal-mall-api.onrender.com/users/${id}`, userData).then(() => {
       dispatch(deleteSuccessAction());
     }).catch((err) => {
       dispatch(deleteFailureAction());
