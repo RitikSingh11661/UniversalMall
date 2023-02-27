@@ -3,14 +3,14 @@
 
 
 
-<p id="description">Universal Mall - India's Leading Online Shopping Experience, Brought to You by Paytm. Online shopping with Paytm Mall is quick, convenient and trouble-free. You can shop for the desired product right from the comfort of your home and get them delivered straight to your doorstep.<br><br><b>This is a collaborative project of 3 members</b><br><br>- Ritik (Team Lead)<br>- Pooja Rathod <br>-Aakash</p>
+<p id="description">Universal Mall - India's Leading Online Shopping Experience, Brought to You by Paytm. Online shopping with Paytm Mall is quick, convenient and trouble-free. You can shop for the desired product right from the comfort of your home and get them delivered straight to your doorstep.<br><br><b>This is a collaborative project of 3 members</b><br><br>- Ritik (Team Lead)<br>- Pooja Rathod <br>- Aakash</p>
 
 
 
 <h2>Screenshots</h2>
 
 
-![Screenshot (42)](https://user-images.githubusercontent.com/110052834/216414046-97f55929-e61c-42fd-a714-807eb9024b73.png)
+![Screenshot (42)](https://photos.google.com/photo/AF1QipMqL5EjpeUCs1__HOT1AZLrR2k8i2MuTMCdRKcy)
 
 
 ![Screenshot (43)](https://user-images.githubusercontent.com/110052834/216414236-15dbbc52-4059-4f91-88bf-411e5563d8cc.png)
