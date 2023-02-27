@@ -10,27 +10,31 @@
 <h2>Screenshots</h2>
 
 
-![Screenshot (42)](https://photos.google.com/photo/AF1QipMqL5EjpeUCs1__HOT1AZLrR2k8i2MuTMCdRKcy)
+![Screenshot (42)](https://i.im.ge/2023/02/27/7sn7mC.homepage-1.png)
 
 
-![Screenshot (43)](https://user-images.githubusercontent.com/110052834/216414236-15dbbc52-4059-4f91-88bf-411e5563d8cc.png)
+![Screenshot (43)](https://i.im.ge/2023/02/27/7snaO4.homepage-2.png)
 
-![Screenshot (45)](https://user-images.githubusercontent.com/110052834/216414336-b027b484-88a5-4a76-8559-69763da93ccb.png)
+![Screenshot (45)](https://i.im.ge/2023/02/27/7snqHD.navbar-product-searching.png)
 
-![Screenshot (46)](https://user-images.githubusercontent.com/110052834/216414433-c94090ae-3f8f-4111-92ad-565963e68961.png)
+![Screenshot (46)](https://i.im.ge/2023/02/27/7sndyY.singleProductPage.png)
 
-![Screenshot (47)](https://user-images.githubusercontent.com/110052834/216414613-3919edcc-fbcd-4e96-8697-6c9fbd175c80.png)
+![Screenshot (47)](https://i.im.ge/2023/02/27/7sn1Bh.cart-page.png)
 
-![Screenshot (48)](https://user-images.githubusercontent.com/110052834/216414749-ca5f352d-9006-4c39-bc3c-822500498856.png)
+![Screenshot (48)](https://i.im.ge/2023/02/27/7snOY8.orders-paage.png)
 
-![Screenshot (49)](https://user-images.githubusercontent.com/110052834/216414846-8f66a410-c0d9-4eea-99a1-1f70bec8545a.png)
+<h2>Admin Side</h2>
 
-![Screenshot (44)](https://user-images.githubusercontent.com/110052834/216414932-c30793da-e547-438f-9dce-5ca07ba3b9ac.png)
+![Screenshot (49)](https://i.im.ge/2023/02/27/7snuo9.admin-dashboard.png)
+
+![Screenshot (44)](https://i.im.ge/2023/02/27/7snSaM.admin-manageProducts.png)
+
+![Screenshot (44)](https://i.im.ge/2023/02/27/7snFhX.admin-analyse.png)
 
 
 <h2>🌐See Live</h2>
 
-[https://paytm-mall-clone-eight.vercel.app/](https://universalmall.vercel.app/)
+[https://paytm-mall-clone-eight.vercel.app/](https://lh3.googleusercontent.com/pw/AMWts8CtCpq9L5jUHdS_DQetnoyXBf6MRdYyukt0k0TpFgQlIQvHGV_3nGkeIsJpqHcRq7wUqwGlC735R23BFPQnmf5_Uxahe7VbABjciosmpHMwZ3tDoq5BR2UbkG1rbPy7qmsQYL_WKgVN8h7wNHTA87vj=w1626-h854-no?authuser=0)
 
 
 
