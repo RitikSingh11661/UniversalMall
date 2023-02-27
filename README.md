@@ -6,7 +6,7 @@ RCT211_Block23_CW Project
 
 
 
-<p id="description">Universal Mall - India's Leading Online Shopping Experience, Brought to You by Paytm. Online shopping with Paytm Mall is quick, convenient and trouble-free. You can shop for the desired product right from the comfort of your home and get them delivered straight to your doorstep.<br><br><b>This is a collaborative project of 3 members</b><br><br>- Ritik (Team Lead)<br>- Pooja Rathod <br>- <br>- Aakash</p>
+<p id="description">Universal Mall - India's Leading Online Shopping Experience, Brought to You by Paytm. Online shopping with Paytm Mall is quick, convenient and trouble-free. You can shop for the desired product right from the comfort of your home and get them delivered straight to your doorstep.<br><br><b>This is a collaborative project of 3 members</b><br><br>- Ritik (Team Lead)<br>- Pooja Rathod <br>-Aakash</p>
 
 
 
