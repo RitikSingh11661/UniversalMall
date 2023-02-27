@@ -7,7 +7,7 @@ import {
 
 } from "./actiontypes";
 
-const initialState = {  allcarosels: {},isLoading: false, products: [], isError: false }
+const initialState = {  allcarosels: {},isLoading: false, products: [], isError: false}
 export const reducer = (state = initialState, { type, payload }) => {
    switch (type) {
       case GET_PRODUCTS_REQUEST: return { ...state, isLoading: true }

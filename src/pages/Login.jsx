@@ -16,61 +16,71 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getUsers, setLogin } from "../redux/Auth/actions";
+import {setLogin } from "../redux/Auth/actions";
 import Loading from "../components/Loading";
+import axios from "axios";
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [users, setUsers] = useState([]);
+  const [admins, setAdmins] = useState([]);
   const toast = useToast();
   const dispatch = useDispatch();
-  let users = useSelector((store) => store.AuthReducer.users);
   const loading = useSelector((store) => store.AuthReducer.isLoading);
   const navigate = useNavigate();
   const location = useLocation();
   const comingFrom = location.state?.from?.pathname || "/";
-  const isAuth = useSelector((store) => store.AuthReducer.isAuth);
-
 
   useEffect(() => {
-    dispatch(getUsers);
+    axios.get('https://universal-mall-api.onrender.com/users').then(res=>setUsers(res.data));
+    axios.get('https://universal-mall-api.onrender.com/admins').then(res=>setAdmins(res.data))
   }, []);
 
   // console.log(users);
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    let check = users.find((el) => {
-      return el.email === email && el.password === password;
-    });
-    console.log(check);
-    localStorage.setItem("userId", check.id)
-    if (check) {
+    let checkAdmin = admins.find(el => el.email === email && el.password === password);
+    if (checkAdmin) {
+      localStorage.setItem("adminId",checkAdmin.id);
       toast({
         title: "Login Successfully.",
-        description: ` Welcome ${email}`,
+        description: ` Welcome Again ${email} as Admin`,
         status: "success",
         duration: 3000,
         position: "top",
         isClosable: true,
       });
       dispatch(setLogin);
-      navigate(comingFrom, { replace: true })
-    } else {
-      toast({
-        title: "Wrong Creadentials.",
-        description: `Please register ${email}`,
-        status: "error",
-        duration: 3000,
-        position: "top",
-        isClosable: true,
-      });
+      navigate('/admin', { replace: true })
+    }else{
+      let checkUser = users.find(el => el.email === email && el.password === password);
+      if (checkUser) {
+        localStorage.setItem("userId", checkUser.id);
+        toast({
+          title: "Login Successfully.",
+          description: ` Welcome ${email}`,
+          status: "success",
+          duration: 3000,
+          position: "top",
+          isClosable: true,
+        });
+        dispatch(setLogin);
+        navigate(comingFrom, { replace: true })
+      } else {
+        console.log('wrong')
+        toast({
+          title: "Wrong Creadentials.",
+          description: `Please register ${email}`,
+          status: "error",
+          duration: 3000,
+          position: "top",
+          isClosable: true,
+        });
+      }
     }
+    
   };
-  console.log(isAuth);
-
-
 
   return loading ? (
     <Loading />

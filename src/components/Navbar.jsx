@@ -73,7 +73,7 @@ const Navbar = () => {
     }
   });
 
-  const handleAuth = () => {
+  const handleLogout = () => {
     dispatch(setLogout);
   };
 
@@ -220,7 +220,7 @@ const Navbar = () => {
               >
                 {data.map((item, index) => (
                   <Box key={index} w="100%">
-                    <NavLink to={`/product/${item.id}`}>
+                    <NavLink to={`/products/${item.id}`}>
                       <Flex
                         bg="white"
                         gap="2"
@@ -279,10 +279,10 @@ const Navbar = () => {
               <Image
                 w={{ base: "10px", md: "20px", lg: "20px" }}
                 src="https://lh3.googleusercontent.com/cKM952bxPmD-jF370bX__2kVdNWHevwFKTFcYyIFL1j64IyV6PCO44udzF-Zokf4FFl5tjY9n9kUZda3_KzHtoLv=w128-h128-e365-rj-sc0x00ffffff"
-                alt=""
+                alt="logout icon"
               />
               <Text
-                onClick={handleAuth}
+                onClick={handleLogout}
                 fontSize={{ base: "6px", sm: "md", lg: "md" }}
               >
                 Logout

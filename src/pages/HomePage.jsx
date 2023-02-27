@@ -4,9 +4,12 @@ import { Carousel } from "../components/Carousel";
 import { GrLinkNext, GrLinkPrevious } from 'react-icons/gr';
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
+import { useEffect } from "react";
+import { getProduct } from "../redux/App/actions";
+import { useDispatch } from "react-redux";
 
 export const HomePage = () => {
-
+  const dispatch=useDispatch();
   let groceryBox = document.querySelector(".grocery-container");
 
   const groceryPrev = () => {
@@ -20,6 +23,10 @@ export const HomePage = () => {
     groceryBox.scrollLeft = groceryBox.scrollLeft + width;
     // console.log(width)
   };
+
+  useEffect(()=>{
+    dispatch(getProduct())
+  },[])
 
   return (
     <>

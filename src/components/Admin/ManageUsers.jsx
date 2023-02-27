@@ -6,7 +6,7 @@ import { FiUserX } from 'react-icons/fi';
 
 const ManageUsers = () => {
   const { isLoadingUserList, isErrorUserList, users,orders,carts} = useSelector(store => store.AdminReducer);
-  let total=0,totalProfit=0;
+  let total=0,totalProfit=0,totalCart=0;
   const dispatch = useDispatch();
   const toast = useToast();
 
@@ -79,10 +79,11 @@ const ManageUsers = () => {
               {totalArray.map((user) => {
                 console.log(user)
                 totalProfit += 100;
+                totalCart+=1;
                 return <Tr key={user.id}>
                   <Td>{user?.username?user.username:user.name}</Td>
                   <Td >{user?.orderQuantity?user.orderQuantity:0}</Td>
-                  <Td>{0}</Td>
+                  <Td>{1}</Td>
                   <Td >₹{user?.totalOrderPrice?user.totalOrderPrice:0}</Td>
                   <Td >₹{totalProfit}</Td>
                   <Td><IconButton aria-label='Delete database' onClick={() => handleDelete(user)} icon={<FiUserX />} /></Td>
@@ -93,7 +94,7 @@ const ManageUsers = () => {
               <Tr>
                 <Th>Total : {users.length}</Th>
                 <Th >Orders : {orders.length}</Th>
-                <Th>Cart : {carts.length}</Th>
+                <Th>Cart : {totalCart}</Th>
                 <Th>Total : ₹{total}</Th>
                 <Th>Profit : ₹{totalProfit}</Th>
                 <Th></Th>
