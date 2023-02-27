@@ -10,6 +10,9 @@ import AddProducts from './AddProducts';
 import AddAdmins from './AddAdmins';
 import Analyse from './Analyse';
 import logo from '../../Images/logo.png';
+import { useDispatch } from 'react-redux';
+import { setLogout } from '../../redux/Auth/actions';
+import axios from 'axios';
 
 const LinkItems = [
     { name: 'Dashboard', compName: 'Dashboard', heading: 'Dashboard', icon: FiHome },
@@ -22,8 +25,16 @@ const LinkItems = [
 ];
 
 function SidebarWithHeader({ children }) {
+    const dispatch = useDispatch();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [comp, setComp] = useState('Dashboard');
+    const [admin, setadmin] = useState({});
+    const adminId = localStorage.getItem('adminId')
+
+    const handleLogout = () => {
+        dispatch(setLogout);
+      };
+      
     const componentChange = (compName = comp) => {
         if (compName === 'Dashboard') return <ManageUsers />
         else if (compName === 'ManageAdmins') return <ManageAdmins />
@@ -33,10 +44,12 @@ function SidebarWithHeader({ children }) {
         else if (compName === 'AddAdmins') return <AddAdmins />
         else if (compName === 'Analyse') return <Analyse />
     }
-
+    
     useEffect(() => {
         componentChange(comp)
+        axios.get(`https://universal-mall-api.onrender.com/admins/${adminId}`).then(res=>setadmin(res.data))
     }, [comp])
+    console.log(admin)
 
     const SidebarContent = ({ onClose, ...rest }) => {
         return (
@@ -60,7 +73,7 @@ function SidebarWithHeader({ children }) {
                     <DrawerContent><SidebarContent onClose={onClose} /></DrawerContent>
                 </Drawer>
                 {/* mobilenav */}
-                <MobileNav onOpen={onOpen} />
+                <MobileNav admin={admin} handleLogout={handleLogout} onOpen={onOpen} />
                 <Flex className='main-content' justifyContent={'center'} ml='100'>
                     {componentChange()}
                 </Flex>
@@ -92,7 +105,7 @@ const NavItem = ({ icon, children, ...rest }) => {
     );
 };
 
-const MobileNav = ({ onOpen, ...rest }) => {
+const MobileNav = ({admin, handleLogout,onOpen, ...rest }) => {
     return (
         <Flex
             ml={{ base: 0, md: 60 }}
@@ -125,11 +138,9 @@ const MobileNav = ({ onOpen, ...rest }) => {
                             transition="all 0.3s"
                             _focus={{ boxShadow: 'none' }}>
                             <HStack>
-                                <Avatar
-                                    size={'sm'} src={'https://avatars.githubusercontent.com/u/72447250?v=4'}
-                                />
+                                <Avatar size={'sm'} src={admin.image}/>
                                 <VStack display={{ base: 'none', md: 'flex' }} alignItems="flex-start" spacing="1px" ml="2">
-                                    <Text fontSize="sm">Ritik</Text>
+                                    <Text fontSize="sm">{admin.name}</Text>
                                     <Text fontSize="xs" color="gray.600">Admin</Text>
                                 </VStack>
                                 <Box display={{ base: 'none', md: 'flex' }}>
@@ -142,7 +153,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                             borderColor={useColorModeValue('gray.200', 'gray.700')}>
                             <MenuItem>Profile</MenuItem>
                             <MenuDivider />
-                            <MenuItem>Sign out</MenuItem>
+                            <MenuItem onClick={handleLogout}>Sign out</MenuItem>
                         </MenuList>
                     </Menu>
                 </Flex>

@@ -23,7 +23,7 @@ const MainRoutes = () => {
         <Route path='/cart' element={<PrivateRoute><Cart /></PrivateRoute>} />
         <Route path='/orders' element={<PrivateRoute><Orders /></PrivateRoute>} />
         <Route path='/products/:id' element={<SingleProductPage />} />
-        <Route path='/admin' element={<Admin/>}/>
+        <Route path='/admin' element={<PrivateRoute><Admin/></PrivateRoute>}/>
         <Route path='/signup' element={<Signup />} />
       </Routes>
     </div>

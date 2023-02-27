@@ -16,6 +16,10 @@ export const Orders = () => {
    },[]);
 
   function OrderTableRow({ order }) {
+   let statusDetail='';
+   if(order.status==='pending')statusDetail='Order Placed, waiting for confirmation';
+   else if(order.status==='Passed')statusDetail='Your orders will be delivered in 4 days';
+   else statusDetail='Your order is rejected by Universal Team';
     return (
       <Tr>
         <Td>
@@ -26,7 +30,7 @@ export const Orders = () => {
         <Td>{order.category}</Td>
         <Td>{order.quantity}</Td>
         <Td>₹{order.originalPrice-order.discountPrice}</Td>
-        <Td>{order.status}</Td>
+        <Td>{statusDetail}</Td>
       </Tr>
     );
   }

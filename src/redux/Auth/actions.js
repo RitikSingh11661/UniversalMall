@@ -108,6 +108,7 @@ export const setLogin = (dispatch) => {
 export const setLogout = (dispatch) => {
   localStorage.setItem("isAuth", false);
   localStorage.setItem("userId", false);
+  localStorage.setItem("adminId", false);
   dispatch(setLogoutAction());
 };
 

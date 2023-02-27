@@ -17,6 +17,7 @@ export const SingleProductPage = () => {
     const Product = useSelector((store) => {
         return store.AppReducer.products;
     });
+    console.log('Product',Product)
     const [productData, setProductData] = useState({});
     const users = useSelector(store => store.AuthReducer.users)
     let userid = localStorage.getItem("userId")
