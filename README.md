@@ -10,32 +10,32 @@
 <h2>Screenshots</h2>
 
 
-![Screenshot (42)](https://i.im.ge/2023/02/27/7sn7mC.homepage-1.png)
+![Screenshot (1)](https://i.im.ge/2023/02/27/7aLrdf.homepage-1.png)
 
 
-![Screenshot (43)](https://i.im.ge/2023/02/27/7snaO4.homepage-2.png)
+![Screenshot (2)](https://i.im.ge/2023/02/27/7aLXn1.homepage-2.png)
 
-![Screenshot (45)](https://i.im.ge/2023/02/27/7snqHD.navbar-product-searching.png)
+![Screenshot (3)](https://i.im.ge/2023/02/27/7aLoxP.navbar-product-searching.png)
 
-![Screenshot (46)](https://i.im.ge/2023/02/27/7sndyY.singleProductPage.png)
+![Screenshot (4)](https://i.im.ge/2023/02/27/7aLTIp.singleProductPage.png)
 
-![Screenshot (47)](https://i.im.ge/2023/02/27/7sn1Bh.cart-page.png)
+![Screenshot (5)](https://i.im.ge/2023/02/27/7aLQQq.cart-page.png)
 
-![Screenshot (48)](https://i.im.ge/2023/02/27/7snOY8.orders-paage.png)
+![Screenshot (6)](https://i.im.ge/2023/02/27/7aIBuD.orders-paage.png)
 
 <h2>Admin Side</h2>
 
-![Screenshot (49)](https://i.im.ge/2023/02/27/7snuo9.admin-dashboard.png)
+![Screenshot (7)](https://i.im.ge/2023/02/27/7aIJPM.admin-dashboard.png)
 
-![Screenshot (44)](https://i.im.ge/2023/02/27/7snSaM.admin-manageProducts.png)
+![Screenshot (8)](https://i.im.ge/2023/02/27/7aIe8C.admin-manageProducts.png)
 
-![Screenshot (44)](https://i.im.ge/2023/02/27/7snFhX.admin-analyse.png)
+![Screenshot (10)](https://i.im.ge/2023/02/27/7aInfY.admin-orders.png)
 
+![Screenshot (11)](https://i.im.ge/2023/02/27/7aIvdh.admin-analyse.png)
 
 <h2>🌐See Live</h2>
 
-[https://paytm-mall-clone-eight.vercel.app/](https://lh3.googleusercontent.com/pw/AMWts8CtCpq9L5jUHdS_DQetnoyXBf6MRdYyukt0k0TpFgQlIQvHGV_3nGkeIsJpqHcRq7wUqwGlC735R23BFPQnmf5_Uxahe7VbABjciosmpHMwZ3tDoq5BR2UbkG1rbPy7qmsQYL_WKgVN8h7wNHTA87vj=w1626-h854-no?authuser=0)
-
+[https://universalmall.vercel.app](https://lh3.googleusercontent.com/pw/AMWts8CtCpq9L5jUHdS_DQetnoyXBf6MRdYyukt0k0TpFgQlIQvHGV_3nGkeIsJpqHcRq7wUqwGlC735R23BFPQnmf5_Uxahe7VbABjciosmpHMwZ3tDoq5BR2UbkG1rbPy7qmsQYL_WKgVN8h7wNHTA87vj=w1626-h854-no?authuser=0)
 
 
 <h2>🛠️ Installation Steps:</h2>
