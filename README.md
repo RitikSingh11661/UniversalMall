@@ -7,7 +7,7 @@
 
 
 
-<h2>Screenshots</h2>
+<h2>Flow of the Website</h2>
 
 
 ![Screenshot (1)](https://i.im.ge/2023/02/27/7aLrdf.homepage-1.png)
